@@ -1252,23 +1252,6 @@
 										},
 										{
 											"_type": "UMLAttributeView",
-											"_id": "AAAAAAFp3+/oj/7KOx0=",
-											"_parent": {
-												"$ref": "AAAAAAFp3ZPSd7CB4Os="
-											},
-											"model": {
-												"$ref": "AAAAAAFp3+/oQ/7HP3Y="
-											},
-											"font": "Arial;13;0",
-											"left": 621,
-											"top": 742,
-											"width": 148.50341796875,
-											"height": 13,
-											"text": "+Typemateriel: int",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
 											"_id": "AAAAAAFp4z+WALoCf0I=",
 											"_parent": {
 												"$ref": "AAAAAAFp3ZPSd7CB4Os="
@@ -1278,7 +1261,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 621,
-											"top": 757,
+											"top": 742,
 											"width": 148.50341796875,
 											"height": 13,
 											"text": "+Editeur: string",
@@ -1295,7 +1278,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 621,
-											"top": 772,
+											"top": 757,
 											"width": 148.50341796875,
 											"height": 13,
 											"text": "+Version: string",
@@ -1312,10 +1295,27 @@
 											},
 											"font": "Arial;13;0",
 											"left": 621,
-											"top": 787,
+											"top": 772,
 											"width": 148.50341796875,
 											"height": 13,
 											"text": "+isHardware: int",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFp56c9JNgb9w8=",
+											"_parent": {
+												"$ref": "AAAAAAFp3ZPSd7CB4Os="
+											},
+											"model": {
+												"$ref": "AAAAAAFp56c8/tgYIIo="
+											},
+											"font": "Arial;13;0",
+											"left": 621,
+											"top": 787,
+											"width": 148.50341796875,
+											"height": 13,
+											"text": "+Statue: int",
 											"horizontalAlignment": 0
 										}
 									],
@@ -4132,7 +4132,7 @@
 											"top": 239,
 											"width": 115.603515625,
 											"height": 13,
-											"text": "Affectation"
+											"text": "AffectationClient"
 										},
 										{
 											"_type": "LabelView",
@@ -5716,7 +5716,7 @@
 											"top": 527,
 											"width": 127.32763671875,
 											"height": 13,
-											"text": "ProduitUtilisateur"
+											"text": "ProduitEmployee"
 										},
 										{
 											"_type": "LabelView",
@@ -5890,7 +5890,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 590,
-									"top": 639,
+									"top": 633,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -5911,7 +5911,7 @@
 									"visible": null,
 									"font": "Arial;13;0",
 									"left": 590,
-									"top": 654,
+									"top": 648,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -5932,7 +5932,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 591,
-									"top": 609,
+									"top": 603,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -6017,7 +6017,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 277,
-									"top": 638,
+									"top": 632,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 30,
@@ -6037,7 +6037,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 280,
-									"top": 652,
+									"top": 646,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -6056,7 +6056,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 263,
-									"top": 611,
+									"top": 605,
 									"width": 20,
 									"height": 13,
 									"alpha": 0.5235987755982988,
@@ -6106,7 +6106,7 @@
 							"tail": {
 								"$ref": "AAAAAAFp3Xu/xJgYj+g="
 							},
-							"points": "591:522;591:630;252:630",
+							"points": "591:522;591:624;252:624",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFp47uWIxPrOx0="
@@ -6159,7 +6159,7 @@
 								"$ref": "AAAAAAFp47uWIhPg++s="
 							},
 							"lineStyle": 1,
-							"points": "410:578;421:630"
+							"points": "411:578;421:624"
 						},
 						{
 							"_type": "UMLAssociationView",
@@ -9684,15 +9684,6 @@
 						},
 						{
 							"_type": "UMLAttribute",
-							"_id": "AAAAAAFp3+/oQ/7HP3Y=",
-							"_parent": {
-								"$ref": "AAAAAAFp3ZPSaLB5i4k="
-							},
-							"name": "Typemateriel",
-							"type": "int"
-						},
-						{
-							"_type": "UMLAttribute",
 							"_id": "AAAAAAFp4z+Vkrn/vFo=",
 							"_parent": {
 								"$ref": "AAAAAAFp3ZPSaLB5i4k="
@@ -9716,6 +9707,15 @@
 								"$ref": "AAAAAAFp3ZPSaLB5i4k="
 							},
 							"name": "isHardware",
+							"type": "int"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAFp56c8/tgYIIo=",
+							"_parent": {
+								"$ref": "AAAAAAFp3ZPSaLB5i4k="
+							},
+							"name": "Statue",
 							"type": "int"
 						}
 					]
@@ -10486,7 +10486,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Affectation",
+					"name": "AffectationClient",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -10549,7 +10549,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "ProduitUtilisateur",
+					"name": "ProduitEmployee",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",

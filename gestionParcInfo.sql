@@ -1,21 +1,6 @@
 create database ParcInformatique
 use parcInformatique
 
-create table RoleUtilisateur
-(
-	Id INT IDENTITY(1,1) PRIMARY KEY,
-	Nom VARCHAR(50),
-	IdUtilisateur INT FOREIGN KEY REFERENCES Utilisateur(id),
-
-	Datecreation date,
-	Datemodification date,
-	Datesuppression date,
-	Creepar int foreign key references utilisateur(id),
-	Modifierpar int foreign key references utilisateur(id),
-	Supprimerpar int foreign key references utilisateur(id),
-	IsDeleted int
-)
-
 create table Utilisateur
 (
 	Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -30,14 +15,28 @@ create table Utilisateur
 	Codepin INT,
 	isAdmin INT default 0,
 
-	Datecreation date,
+	Datecreation date default(getdate()),
 	Datemodification date,
-	Datesuppression date,
 	Creepar int foreign key references utilisateur(id),
 	Modifierpar int foreign key references utilisateur(id),
-	Supprimerpar int foreign key references utilisateur(id),
 	IsDeleted int
 )
+
+
+
+create table RoleUtilisateur
+(
+	Id INT IDENTITY(1,1) PRIMARY KEY,
+	Nom VARCHAR(50),
+	IdUtilisateur INT FOREIGN KEY REFERENCES Utilisateur(id),
+
+	Datecreation date default(getdate()),
+	Datemodification date,
+	Creepar int foreign key references utilisateur(id),
+	Modifierpar int foreign key references utilisateur(id),
+	IsDeleted int
+)
+
 
 create table Client
 (
@@ -49,15 +48,13 @@ create table Client
 	Ville VARCHAR(30),
 	Siteweb VARCHAR(30),
 	Debutcontract DATE,
-	Heurcontract INT,
+	Heurecontract INT,
 	Prixheur FLOAT,
 
-	Datecreation date,
+	Datecreation date default(getdate()),
 	Datemodification date,
-	Datesuppression date,
 	Creepar int foreign key references utilisateur(id),
 	Modifierpar int foreign key references utilisateur(id),
-	Supprimerpar int foreign key references utilisateur(id),
 	IsDeleted int
 )
 
@@ -66,13 +63,11 @@ create table AffectationClient
 	Id INT IDENTITY(1,1),
 	Idclient INT FOREIGN KEY REFERENCES client(id),
 	Idutilisateur INT FOREIGN KEY REFERENCES utilisateur(id),
-	Dateaffectation DATE,
+	Dateaffectation DATE default(getdate()),
 	constraINT ac_pk PRIMARY KEY (id,idclient,idutilisateur),
 	
 	Datemodification date,
-	Datesuppression date,
 	Modifierpar int foreign key references utilisateur(id),
-	Supprimerpar int foreign key references utilisateur(id),
 	IsDeleted int
 )
 
@@ -80,34 +75,34 @@ create table Departement
 (
 	id INT IDENTITY(1,1) PRIMARY KEY,
 	Nom VARCHAR(30),
-	IdDeleted int
+	IdDeleted int,
+	IdCLient int foreign key references client(id)
 )
 
 create table Employee
 (
-	id INT IDENTITY(1,1) PRIMARY KEY,
+	Id INT IDENTITY(1,1) PRIMARY KEY,
 	Nom VARCHAR(30),
 	Prenom VARCHAR(30),
 	Tel VARCHAR(30),
-	Email VARCHAR(30),
+	Email VARCHAR(30) unique,
 	Login_e VARCHAR(30),
 	Password_e VARCHAR(30),
-	isResponsable INT default 0,
+	IsResponsable INT default 0,
 	IdDep INT FOREIGN KEY REFERENCES Departement(id),
-	Codepin INT,
+	Idclient int foreign key references client(id),
 
-	Datecreation date,
+
+	Datecreation date default(getdate()),
 	Datemodification date,
-	Datesuppression date,
+
 	Creepar int foreign key references utilisateur(id),
 	Modifierpar int foreign key references utilisateur(id),
-	Supprimerpar int foreign key references utilisateur(id),
 
-	Creepar_ int foreign key references Employee(id),
-	Modifierpar_ int foreign key references Employee(id),
-	Supprimerpar_ int foreign key references Employee(id),
 	IsDeleted int
 )
+
+
 create table TypeProduit
 (
 	id INT IDENTITY(1,1) PRIMARY KEY,
@@ -125,19 +120,16 @@ create table Produit
 	Marque VARCHAR(30),
 	Datefabrication Date,
 	Prix float,
-	Login_p VARCHAR(30),
-	Password_p VARCHAR(30),
-	Editeur VARCHAR(30),
-	Version_p VARCHAR(20),
+
 	IsHardware INT,
 	IdType INT FOREIGN KEY REFERENCES typeproduit(id),
 
-	Datecreation date,
+	Datecreation date default(getdate()),
 	Datemodification date,
-	Datesuppression date,
+	
 	Creepar int foreign key references utilisateur(id),
 	Modifierpar int foreign key references utilisateur(id),
-	Supprimerpar int foreign key references utilisateur(id),
+	
 	IsDeleted int
 )
 
@@ -160,64 +152,60 @@ create table ValeurProp
 create table Demande
 (
 	Id INT IDENTITY(1,1) PRIMARY KEY,
-	Datedemande DATE,
-	Description_d VARCHAR(30),
-	Statue VARCHAR(30),
+	Datedemande DATE default getdate(),
+	Description_d text,
+	Statut VARCHAR(30),
 	IdEmployee INT FOREIGN KEY REFERENCES Employee(id),
 
 	
 	Datemodification date,
-	Datesuppression date,
 	Modifierpar int foreign key references utilisateur(id),
-	Supprimerpar int foreign key references utilisateur(id),
-
-	Creepar_ int foreign key references Employee(id),
-	Modifierpar_ int foreign key references Employee(id),
-	Supprimerpar_ int foreign key references Employee(id),
 	IsDeleted int
 )
+
 
 create table Intervention
 (
 	Id INT IDENTITY(1,1) PRIMARY KEY,
-	DateIntervention DATE,
-	Dateplacement INT,
-	Debut INT,
-	Fin INT,
+	DateIntervention DATE default(getdate()),
+	Deplacement varchar(30),
+	TypeIntervention varchar(30),
+	Debut DATE,
+	Fin DATE,
 	Duree INT,
-	Activites TEXT,
-	Description_i TEXT,
-	Observation TEXT,
-	Statue VARCHAR(20),
+	
+	Statut VARCHAR(20),
 	IdDemande INT FOREIGN KEY REFERENCES Demande(id),
 	Idutilisateur int foreign key references utilisateur(id),
+	Idclient int foreign key references client(id),
 
 	Datemodification date,
-	Datesuppression date,
 	Modifierpar int foreign key references utilisateur(id),
-	Supprimerpar int foreign key references utilisateur(id),
 	IsDeleted int
+)
+
+create table observation
+(
+	Id int identity(1,1) primary key,
+	IdIntervention int foreign key references intervention(id),
+	IdUser varchar(30),
+	TypeOb varchar(30), --client,inter,system
+	Textobservation text
 )
 
 create table ProduitClient
 (
 	Id INT IDENTITY(1,1) PRIMARY KEY,
-	Dateaffectation DATE,
+	Dateaffectation DATE default getdate(),
 	Prixvente FLOAT,
 	Idclient INT FOREIGN KEY REFERENCES Client(id),
 	Idproduit INT FOREIGN key REFERENCES Produit(id),
 	ParIntervention INT FOREIGN KEY REFERENCES Intervention(id),
-
-
+   
 	Datemodification date,
-	Datesuppression date,
+	
 	Creepar int foreign key references utilisateur(id),
 	Modifierpar int foreign key references utilisateur(id),
-	Supprimerpar int foreign key references utilisateur(id),
-
-	Creepar_ int foreign key references Employee(id),
-	Modifierpar_ int foreign key references Employee(id),
-	Supprimerpar_ int foreign key references Employee(id),
 	IsDeleted int
 )
 
@@ -228,16 +216,10 @@ create table Installer
 	Idlogiciel INT FOREIGN KEY REFERENCES produitClient(id),
 	Idsoftware INT FOREIGN KEY REFERENCES produitClient(id),
 
-	Datecreation date,
+	Datecreation date default(getdate()),
 	Datemodification date,
-	Datesuppression date,
 	Creepar int foreign key references utilisateur(id),
 	Modifierpar int foreign key references utilisateur(id),
-	Supprimerpar int foreign key references utilisateur(id),
-
-	Creepar_ int foreign key references Employee(id),
-	Modifierpar_ int foreign key references Employee(id),
-	Supprimerpar_ int foreign key references Employee(id),
 	IsDeleted int
 )
 
@@ -246,17 +228,36 @@ create table ProduitUtiliser
 	Id INT IDENTITY(1,1),
 	IdProduitClient INT FOREIGN KEY REFERENCES produitClient(id),
 	IdEmployee INT FOREIGN KEY REFERENCES employee(id),
+
+	Login_u VARCHAR(30),
+	Password_u VARCHAR(30),
 	CONSTRAINT pu_pk PRIMARY KEY(id,IdProduitClient,IdEmployee),
 
-	Datecreation date,
+	Datecreation date default(getdate()),
 	Datemodification date,
-	Datesuppression date,
+	
 	Creepar int foreign key references utilisateur(id),
 	Modifierpar int foreign key references utilisateur(id),
-	Supprimerpar int foreign key references utilisateur(id),
 	
-	Creepar_ int foreign key references Employee(id),
-	Modifierpar_ int foreign key references Employee(id),
-	Supprimerpar_ int foreign key references Employee(id),
 	IsDeleted int
 )
+
+insert into Client(Nom) values ('guijj') select SCOPE_IDENTITY()
+
+
+select * from Intervention 
+select * from observation
+select * from Demande
+
+
+
+
+
+select * from Utilisateur
+
+alter table intervention
+add constraint default_date default getdate() for dateintervention
+
+insert into Demande(Description_d,Statut,IdEmployee) values ('Ihave ap roblm with my computer hgrehjkh ururiui uiruoeiyrey ulore mlemihi yurjhjk so that wpnt djh yh ueupozphoaie  nand wdo hnin yujjj ruiyeyej hhhfoor ioro mi ue  uso that will mkes me glad','encours',1)
+
+insert into Demande(Description_d,Statut,IdEmployee) values ('So that withh orkjrlj heurutruteriu ierytierrifr eriuuieriyei yeeryptuierypityerpiyt reutyeruityeroi uâ zerutyeruotyioer erutuo','encours',1)
